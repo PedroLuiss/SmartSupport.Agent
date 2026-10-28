@@ -1,0 +1,23 @@
+@SmartSupport.Agent_HostAddress = http://localhost:5066
+
+### Analizar un reporte de soporte en texto
+POST {{SmartSupport.Agent_HostAddress}}/api/tickets/analyze
+Content-Type: application/json
+
+{
+  "rawContent": "Hola, soy Ana López. Desde ayer no puedo descargar la factura INV-2048 por $1,250 USD. Necesito resolverlo hoy para cerrar mi contabilidad."
+}
+
+###
+
+### Analizar un archivo TXT o PDF
+POST {{SmartSupport.Agent_HostAddress}}/api/tickets/analyze-file
+Content-Type: multipart/form-data; boundary=SmartSupportBoundary
+
+--SmartSupportBoundary
+Content-Disposition: form-data; name="file"; filename="reporte.txt"
+Content-Type: text/plain
+
+Cliente: Ana López
+No puedo descargar mi factura INV-2048 por $1,250 USD.
+--SmartSupportBoundary--
